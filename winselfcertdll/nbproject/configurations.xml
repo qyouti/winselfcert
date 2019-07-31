@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <logicalFolder name="HeaderFiles"
+                   displayName="Header Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="ResourceFiles"
+                   displayName="Resource Files"
+                   projectFiles="true">
+    </logicalFolder>
+    <logicalFolder name="SourceFiles"
+                   displayName="Source Files"
+                   projectFiles="true">
+      <itemPath>C:/Data/Documents/NetBeansProjects/winselfcertify/winselfcertdll/winselfcert.c</itemPath>
+    </logicalFolder>
+    <logicalFolder name="TestFiles"
+                   displayName="Test Files"
+                   projectFiles="false"
+                   kind="TEST_LOGICAL_FOLDER">
+    </logicalFolder>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceRootList>
+    <Elem>C:\Data\Documents\NetBeansProjects\winselfcertify\winselfcertdll</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Debug" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <incDir>
+            <pElem>C:/data/Documents/NetBeansProjects/winselfcert/headers</pElem>
+            <pElem>C:/Program Files/Java/jdk1.8.0_152/include</pElem>
+            <pElem>C:/Program Files/Java/jdk1.8.0_152/include/win32</pElem>
+          </incDir>
+        </cTool>
+        <linkerTool>
+          <linkerAddLib>
+            <pElem>C:/Program Files (x86)/Windows Kits/10/Lib/10.0.17763.0/um/x64</pElem>
+          </linkerAddLib>
+          <commandLine>-lcrypt32</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="C:/Data/Documents/NetBeansProjects/winselfcertify/winselfcertdll/winselfcert.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+    </conf>
+    <conf name="Release" type="2">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>true</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <compileType>
+        <cTool>
+          <developmentMode>5</developmentMode>
+          <incDir>
+            <pElem>../winselfcert/headers</pElem>
+            <pElem>C:/Program Files/Java/jdk1.8.0_152/include</pElem>
+            <pElem>C:/Program Files/Java/jdk1.8.0_152/include/win32</pElem>
+          </incDir>
+        </cTool>
+        <ccTool>
+          <developmentMode>5</developmentMode>
+        </ccTool>
+        <fortranCompilerTool>
+          <developmentMode>5</developmentMode>
+        </fortranCompilerTool>
+        <asmTool>
+          <developmentMode>5</developmentMode>
+        </asmTool>
+        <linkerTool>
+          <output>${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/winselfcert.${CND_DLIB_EXT}</output>
+          <commandLine>-lcrypt32</commandLine>
+        </linkerTool>
+      </compileType>
+      <item path="C:/Data/Documents/NetBeansProjects/winselfcertify/winselfcertdll/winselfcert.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
