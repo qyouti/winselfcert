@@ -6,3 +6,8 @@ This library attempts to fill that gap in functionality of the standard Java MSC
 There is a 'Demo' class which illustrates potential uses by signing/verifying and encrypting/decrypting some data using standard Java security framework. It also shows how a Windows public key can be saved in OpenPGP format with the help of BouncyCastle. (BouncyCastle is only needed for that last part - it isn't needed for creating key pairs etc.)
 
 This GIT repository is arranged as two Netbeans projects - one for the Java classes and one for the Windows DLL. Development and building of the native Windows DLL was done using cygwin and the mingw tool chains for 64 bit windows.
+
+Why?
+----
+
+The Qyouti project wants users of Windows workstations to use private keys that are generated within the Windows cryptography system while denying the ability to export them. Also, to configure them so that when any application attempts to make use of a private key Windows will pop up a security alert asking them to approve.  This library will enable the creation of such keys. Hopefully by splitting it off into a sub-project it may be useful to others too.
