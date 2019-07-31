@@ -27,7 +27,6 @@
     </logicalFolder>
   </logicalFolder>
   <sourceRootList>
-    <Elem>C:\Data\Documents\NetBeansProjects\winselfcertify\winselfcertdll</Elem>
     <Elem>C:\Data\Documents\NetBeansProjects\winselfcert\winselfcertdll</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>

@@ -1,8 +1,19 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2019 Leeds Beckett University.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 package org.qyouti.winselfcert;
 
 import java.io.IOException;
@@ -19,7 +30,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Used to access the winselfcert native library which will interface with the Microsoft Windows 
+ * Cryptography API (CAPI) and create a self-signed digital certificate with key pair. When Sun's 
+ * MSCAPI security provider is used to create self-signed certificates that code hard-wires some 
+ * of the options.  Rather than implement a whole new security provider to fix that small limitation
+ * this class operates outside of the Java Cryptography Architecture to call into CAPI but the 
+ * resources it creates (certificate and keys) can be used within the JCA using the standard MSCAPI 
+ * provider. 
+ * 
+ * The general patter of usage is this:
+ * 
+ * 1) Set up - ensure that the shared native library is in the library path.
+ * 2) Construct an instance of this class.
+ * 3) Call generateSelfSignedCertificate()
+ * 4) Use 'get' methods to fetch the certificate and keys that were created using the MSCAPI provider.
+ * 
  * @author maber01
  */
 public class WindowsCertificateGenerator
@@ -87,9 +112,10 @@ public class WindowsCertificateGenerator
   private static boolean libloaded = false;
   private static boolean liberror = false;
 
-  // Run this command to dump detailed info on all certificates
-  // in the 'my' store.
-  // certutil -v -store -user my
+/**
+ * Loads the native library unless already loaded.
+ * @return 
+ */
   private static boolean loadLibrary()
   {
     if (libloaded)
@@ -119,6 +145,9 @@ public class WindowsCertificateGenerator
   Key publickey;
   PrivateKey privatekey;
 
+  /**
+   * Typically one instance is constructed to generate one certificate.
+   */
   public WindowsCertificateGenerator()
   {
     try
@@ -133,7 +162,66 @@ public class WindowsCertificateGenerator
     }
   }
 
-  public String findAliasFromSerialNumber(BigInteger serial)
+    /**
+   * The JCA keystore where the generated data will be found.
+   * @return A JCA KeyStore implemented by Sun's MSCAPI provider.
+   */
+  public KeyStore getKeyStore()
+  {
+    return keystore;
+  }
+
+  /**
+   * The alias of the certificate that was just created.
+   * @return Null if no certificate generated.
+   */
+  public String getAlias()
+  {
+    return alias;
+  }
+
+  /**
+   * JCA Certificate representing the certificate that was generated.
+   * @return Null if no certificate generated.
+   */
+  public Certificate getCertificate()
+  {
+    return certificate;
+  }
+
+  /**
+   * JCA PublicKey from the certificate that was generated.
+   * @return Null if no certificate generated.
+   */
+  public PublicKey getPublickey()
+  {
+    return (PublicKey) publickey;
+  }
+
+  /**
+   * JCA PrivateKey from the certificate that was generated. Note that it will be impossible to access the actual
+   * data of the key (e.g. modulus) from this class. It holds a handle onto a data structure held in the Windows 
+   * security subsystem so all decryption or signing operations must take place within that subsystem via JCA
+   * and Sun's MSCAPI provider.
+   * @return Null if no certificate generated.
+   */
+  public PrivateKey getPrivatekey()
+  {
+    return privatekey;
+  }
+
+  
+  
+  
+  /**
+   * Search the (MSCAPI provider) keystore for a certificate with a
+   * given serial number and retrieve the alias.
+   * @param serial Serial number of the desired certificate.
+   * @return The alias used in the CAPI store for the given certificate or null if not found.
+   * @throws GeneralSecurityException
+   * @throws IOException 
+   */
+  private String findAliasFromSerialNumber(BigInteger serial)
           throws GeneralSecurityException, IOException
   {
     Enumeration<String> aliases = keystore.aliases();
@@ -155,6 +243,20 @@ public class WindowsCertificateGenerator
     return null;
   }
 
+  /**
+   * Generate a self-signed certificate and fetch references to it and its nested pair of keys
+   * using the MSCAPI security provider.
+   * @param commonname X500 common name used in the certificate.
+   * @param containername A unique container name.
+   * @param providername This is the CAPI provider name NOT a JCA provider name. Use one of the static constants, 
+   * MS_*, defined in this class.
+   * @param providertype This is the CAPI provider type. Use one of the static constants, PROV_*, defined in this class.
+   * @param keyexchange Can't remember what this is!
+   * @param keybitsize Size in bits of key - consult MS documentation for the limitations of various providers.
+   * @param keyflags This is the crucial functionality lacking in Sun's MSCAPI provider. Use bitwise combination of CRYPT_* constants.
+   * @return A BigInteger representation of Microsoft's locally unique serial number or null if no certificate was created.
+   * @throws WindowsCertificateException Thrown if a CAPI error occurs within the native code.
+   */
   public BigInteger generateSelfSignedCertificate(
           String commonname,
           String containername,
@@ -214,31 +316,19 @@ public class WindowsCertificateGenerator
     return null;
   }
 
-  public KeyStore getKeyStore()
-  {
-    return keystore;
-  }
 
-  public String getAlias()
-  {
-    return alias;
-  }
-
-  public Certificate getCertificate()
-  {
-    return certificate;
-  }
-
-  public PublicKey getPublickey()
-  {
-    return (PublicKey) publickey;
-  }
-
-  public PrivateKey getPrivatekey()
-  {
-    return privatekey;
-  }
-
+  /**
+   * This is the one native method in the library which is called by the matching public Java method.
+   * @param commonname X500 common name used in the certificate.
+   * @param containername A unique container name.
+   * @param providername This is the CAPI provider name NOT a JCA provider name.
+   * @param providertype This is the CAPI provider type. 
+   * @param keyexchange Can't remember what this is!
+   * @param keybitsize Size in bits of key.
+   * @param keyflags Flags indicating various options.
+   * @return A BigInteger representation of Microsoft's locally unique serial number or null if no certificate was created.
+   * @throws WindowsCertificateException Thrown if a CAPI error occurs within the native code.
+   */
   private native byte[] requestCAPISelfSignedCertificate(
           String commonname,
           String containername,
