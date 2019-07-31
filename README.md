@@ -1,5 +1,5 @@
 # winselfcert
-Java library and native library for creating self-signed certificates in the MS CAPI certificate store. Has more functionality than using the MSCAPI security provider.
+Java library and native library for creating self-signed certificates in the MS CAPI certificate store. Has more functionality than using Sun's MSCAPI security provider.
 
 This library attempts to fill that gap in functionality of the standard Java MSCAPI provider. It can be used to create key pairs using any of the options offered by Microsoft Windows and those key pairs can then be used as normal with the Java MSCAPI security provider. For those keys that can be exported, e.g. public keys, they can be converted to other formats and used with other security frameworks or providers.
 
