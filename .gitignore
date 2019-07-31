@@ -1,6 +1,9 @@
 winselfcert/build/*
 winselfcert/dist/*
+winselfcert/libs/*
 winselfcert/nbproject/private/
+winselfcert/nbproject/build-impl.xml
+
 winselfcertdll/build/*
 winselfcertdll/dist/*
 winselfcertdll/nbproject/private/
