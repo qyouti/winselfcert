@@ -12,7 +12,7 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
-      <itemPath>C:/Data/Documents/NetBeansProjects/winselfcertify/winselfcertdll/winselfcert.c</itemPath>
+      <itemPath>C:/Data/Documents/NetBeansProjects/winselfcert/winselfcertdll/winselfcert.c</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -28,6 +28,7 @@
   </logicalFolder>
   <sourceRootList>
     <Elem>C:\Data\Documents\NetBeansProjects\winselfcertify\winselfcertdll</Elem>
+    <Elem>C:\Data\Documents\NetBeansProjects\winselfcert\winselfcertdll</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -52,7 +53,7 @@
           <commandLine>-lcrypt32</commandLine>
         </linkerTool>
       </compileType>
-      <item path="C:/Data/Documents/NetBeansProjects/winselfcertify/winselfcertdll/winselfcert.c"
+      <item path="C:/Data/Documents/NetBeansProjects/winselfcert/winselfcertdll/winselfcert.c"
             ex="false"
             tool="0"
             flavor2="0">
@@ -87,7 +88,7 @@
           <commandLine>-lcrypt32</commandLine>
         </linkerTool>
       </compileType>
-      <item path="C:/Data/Documents/NetBeansProjects/winselfcertify/winselfcertdll/winselfcert.c"
+      <item path="C:/Data/Documents/NetBeansProjects/winselfcert/winselfcertdll/winselfcert.c"
             ex="false"
             tool="0"
             flavor2="0">

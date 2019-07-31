@@ -35,7 +35,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
-	${OBJECTDIR}/_ext/8f804d2c/winselfcert.o
+	${OBJECTDIR}/_ext/d914b006/winselfcert.o
 
 
 # C Compiler Flags
@@ -62,10 +62,10 @@ ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwinselfcertdll.${CND_DLIB_EXT}: ${
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.c} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/libwinselfcertdll.${CND_DLIB_EXT} ${OBJECTFILES} ${LDLIBSOPTIONS} -lcrypt32 -shared
 
-${OBJECTDIR}/_ext/8f804d2c/winselfcert.o: /cygdrive/C/Data/Documents/NetBeansProjects/winselfcertify/winselfcertdll/winselfcert.c
-	${MKDIR} -p ${OBJECTDIR}/_ext/8f804d2c
+${OBJECTDIR}/_ext/d914b006/winselfcert.o: /cygdrive/C/Data/Documents/NetBeansProjects/winselfcert/winselfcertdll/winselfcert.c
+	${MKDIR} -p ${OBJECTDIR}/_ext/d914b006
 	${RM} "$@.d"
-	$(COMPILE.c) -g -I/cygdrive/C/data/Documents/NetBeansProjects/winselfcert/headers -I/cygdrive/C/Program\ Files/Java/jdk1.8.0_152/include -I/cygdrive/C/Program\ Files/Java/jdk1.8.0_152/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/8f804d2c/winselfcert.o /cygdrive/C/Data/Documents/NetBeansProjects/winselfcertify/winselfcertdll/winselfcert.c
+	$(COMPILE.c) -g -I/cygdrive/C/data/Documents/NetBeansProjects/winselfcert/headers -I/cygdrive/C/Program\ Files/Java/jdk1.8.0_152/include -I/cygdrive/C/Program\ Files/Java/jdk1.8.0_152/include/win32  -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/_ext/d914b006/winselfcert.o /cygdrive/C/Data/Documents/NetBeansProjects/winselfcert/winselfcertdll/winselfcert.c
 
 # Subprojects
 .build-subprojects:
