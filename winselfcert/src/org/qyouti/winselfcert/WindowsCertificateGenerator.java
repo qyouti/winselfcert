@@ -157,7 +157,7 @@ public class WindowsCertificateGenerator
     }
     catch (Exception ex)
     {
-      Logger.getLogger(WindowsCertificateGenerator.class.getName()).log(Level.SEVERE, null, ex);
+      //Logger.getLogger(WindowsCertificateGenerator.class.getName()).log(Level.SEVERE, null, ex);
       keystore = null;
     }
   }
